@@ -3,3 +3,4 @@ hello
 function Object() { [native code] }
 null
 1,2,3,string
+Server started on: 8080
