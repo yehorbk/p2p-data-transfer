@@ -1,8 +1,8 @@
 'use strict';
 
 const net = require('net');
-const Config = require('./config');
-const Logger = require('./logger');
+const Config = require('./environment/config');
+const Logger = require('./environment/logger');
 
 const HOST = process.argv[2];
 
