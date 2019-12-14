@@ -1,5 +1,3 @@
-const Config = {
+module.exports = {
     PORT: 8080
 }
-
-module.exports.Config;
