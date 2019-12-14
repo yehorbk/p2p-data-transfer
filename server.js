@@ -13,7 +13,6 @@ if (HOST) {
 }
 
 function connectToServer(host) {
-    Logger.log(host);
     net.connect({host: host, port: Config.PORT}, () => {
         Logger.log('Connected!');
     });
