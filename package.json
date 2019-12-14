@@ -1,0 +1,27 @@
+{
+  "name": "p2p-data-transfer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "node-rsa": "^1.0.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yehorbk/p2p-data-transfer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yehorbk/p2p-data-transfer/issues"
+  },
+  "homepage": "https://github.com/yehorbk/p2p-data-transfer#readme"
+}
