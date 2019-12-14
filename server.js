@@ -62,12 +62,3 @@ function listenToMessage() {
 function sendMessage(message) {
     socket.write(message)
 }
-
-
-/*
-
-   connection.on('end', function() {
-      console.log('client disconnected');
-   });
-
-*/
