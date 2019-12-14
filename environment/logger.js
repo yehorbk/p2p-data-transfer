@@ -6,8 +6,11 @@ const log = (data) => {
 }
 
 const logToFile = (data) => {
-    fs.appendFile('./logs/server.log', data, (error) => {
-        throw new Error(error);
+    data += '\n';
+    fs.appendFile('../logs/server.log', data, (error) => {
+        if (error) {
+            throw new Error(error);
+        }
     })
 
 }
