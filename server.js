@@ -28,7 +28,7 @@ function connectToServer(host = '127.0.0.1') {
         // console.log("1" + data.toString());
         // const message = Crypto.decode(data.toString());
         // console.log(message);
-        console.log(data);
+        console.log(data.toString());
     })
 }
 
@@ -69,7 +69,6 @@ function bindConnectionMethods(connection) {
 function listenToMessage() {
     readline.question('', (data) => {
         sendMessage(data);
-        readline.close();
         listenToMessage();
     });
 }
