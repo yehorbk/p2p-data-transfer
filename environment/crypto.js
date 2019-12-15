@@ -1,7 +1,7 @@
 const NodeRSA = require('node-rsa');
 
 const key = new NodeRSA({b:512});
-
+key.setOptions({encryptionScheme: 'pkcs1'});
 const encode = (data) => {
     return key.encrypt(data, 'base64');
 }
