@@ -29,7 +29,13 @@ function connectToServer(host = '127.0.0.1') {
         // const message = Crypto.decode(data.toString());
         // console.log(message);
         console.log(data.toString());
-    })
+    });
+    socket.on('sync', (data) => {
+        console.log(data);
+    });
+    socket.on('end', () => {
+        Logger.log('Я выхожу, пацаны')
+    });
 }
 
 function startServer() {
@@ -37,6 +43,7 @@ function startServer() {
         Logger.log('User connected!');
         addConnection(connection);
         bindConnectionMethods(connection);
+        syncWithConnections();
     });
     server.listen(Config.PORT, function () {
         Logger.log('Server started on: ' + Config.PORT);
@@ -65,6 +72,12 @@ function bindConnectionMethods(connection) {
     });
     connection.pipe(connection);
 } 
+
+function syncWithConnections() {
+    for (let item of connections) {
+        item.emit('sync', { sanya: 'teamlead' })
+    }
+}
 
 function listenToMessage() {
     readline.question('', (data) => {
