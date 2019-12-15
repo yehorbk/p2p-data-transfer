@@ -23,28 +23,20 @@ function connectToServer(host = '127.0.0.1') {
         Logger.log('Connected!');
         listenToMessage();
     });
+    socket.on('data', (data) => {
+        console.log(data.toString());
+    })
 }
 
 function startServer() {
     const server = net.createServer((connection) => {
         Logger.log('User connected!');
         addConnection(connection);
-        connection.pipe(connection);
-
-        connection.on('data', (data) => {
-            console.log(data);
-            for (let item of connections) {
-                item.write(data);
-            }
-        });
-
+        bindConnectionMethods(connection);
     });
     server.listen(Config.PORT, function () {
         Logger.log('Server started on: ' + Config.PORT);
         connectToServer();
-    });
-    server.on('end', (connection) => {
-        Logger.log('User disconnected: ' + connection);
     });
 }
 
@@ -52,10 +44,25 @@ function addConnection(connection) {
     connections.push(connection);
 }
 
+function bindConnectionMethods(connection) {
+    connection.on('data', (data) => {
+        for (let item of connections) {
+            if (item != connection) {
+                item.write(data);
+            }
+        }
+    });
+    connection.on('end', (connection) => { // It cause exception!
+        Logger.log('User disconnected: ' + connection);
+    });
+    connection.pipe(connection);
+} 
+
 function listenToMessage() {
-    readline.question('Message: ', (data) => {
+    readline.question('', (data) => {
         sendMessage(data);
         readline.close();
+        listenToMessage();
     });
 }
 
