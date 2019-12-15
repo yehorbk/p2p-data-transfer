@@ -25,8 +25,10 @@ function connectToServer(host = '127.0.0.1') {
         listenToMessage();
     });
     socket.on('data', (data) => {
-        const message = Crypto.decode(data.toString());
-        console.log(message);
+        // console.log("1" + data.toString());
+        // const message = Crypto.decode(data.toString());
+        // console.log(message);
+        console.log(data);
     })
 }
 
@@ -48,10 +50,13 @@ function addConnection(connection) {
 
 function bindConnectionMethods(connection) {
     connection.on('data', (data) => {
-        const message = Crypto.encode(data);
+        // const message = Crypto.encode(data.toString());
+        // console.log("2" + data.toString());
+        // console.log(message)
         for (let item of connections) {
             if (item != connection) { 
-                item.write(message);
+                // item.write(message);
+                item.write(data);
             }
         }
     });
