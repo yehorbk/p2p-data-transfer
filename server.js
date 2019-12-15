@@ -53,7 +53,7 @@ function bindConnectionMethods(connection) {
         }
     });
     connection.on('end', (connection) => { // It cause exception!
-        Logger.log('User disconnected: ' + connection);
+        Logger.log('User disconnected: ' + connections.indexOf(connection));
     });
     connection.pipe(connection);
 } 
