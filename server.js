@@ -3,6 +3,7 @@
 const net = require('net');
 const Config = require('./environment/config');
 const Logger = require('./environment/logger');
+const Crypto = require('./environment/crypto');
 const readline = require('readline').createInterface({
     input: process.stdin,
     output: process.stdout
@@ -24,7 +25,8 @@ function connectToServer(host = '127.0.0.1') {
         listenToMessage();
     });
     socket.on('data', (data) => {
-        console.log(data.toString());
+        const message = Crypto.decode(data.toString());
+        console.log(message);
     })
 }
 
@@ -46,9 +48,10 @@ function addConnection(connection) {
 
 function bindConnectionMethods(connection) {
     connection.on('data', (data) => {
+        const message = Crypto.encode(data);
         for (let item of connections) {
-            if (item != connection) {
-                item.write(data);
+            if (item != connection) { 
+                item.write(message);
             }
         }
     });
